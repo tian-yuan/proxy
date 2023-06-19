@@ -39,9 +39,8 @@ bind(
 #
 # Note: this is needed by release builder to resolve envoy dep sha to tag.
 # Commit date: 2022-07-19
-ENVOY_SHA = "49bb1eec9b393bfa784306923cb42a6c3aa4138f"
+ENVOY_SHA = "465a5b460025a5c109d537f63441827d725896d5"
 
-ENVOY_SHA256 = "fdf69b8d6f40c82c8d9f24f5ba9b884e8925de9e987f632a55f548324bb8f1f6"
 
 ENVOY_ORG = "envoyproxy"
 
@@ -49,11 +48,11 @@ ENVOY_REPO = "envoy"
 
 # To override with local envoy, just pass `--override_repository=envoy=/PATH/TO/ENVOY` to Bazel or
 # persist the option in `user.bazelrc`.
-http_archive(
+
+git_repository(
     name = "envoy",
-    sha256 = ENVOY_SHA256,
-    strip_prefix = ENVOY_REPO + "-" + ENVOY_SHA,
-    url = "https://github.com/" + ENVOY_ORG + "/" + ENVOY_REPO + "/archive/" + ENVOY_SHA + ".tar.gz",
+    commit = ENVOY_SHA,
+    remote = "https://github.com/tian-yuan/proxy.git",
 )
 
 load("@envoy//bazel:api_binding.bzl", "envoy_api_binding")
